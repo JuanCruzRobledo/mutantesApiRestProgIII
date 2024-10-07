@@ -1,17 +1,22 @@
 package com.juan.parcialmutantesprogiii.domain.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
-public class Dna {
+@NoArgsConstructor
+public class Dna{
     @Id
-    private String dna; // Usamos el ADN como clave primaria para evitar duplicados
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String dnaSequence;
+
+    @Column(nullable = false)
     private boolean isMutant;
 }
