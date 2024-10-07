@@ -1,5 +1,6 @@
 package com.juan.parcialmutantesprogiii.services;
 
+import com.juan.parcialmutantesprogiii.detector.MutantDetector;
 import com.juan.parcialmutantesprogiii.domain.dtos.DnaStats;
 import com.juan.parcialmutantesprogiii.domain.entities.Dna;
 import com.juan.parcialmutantesprogiii.repositories.DnaRepository;
@@ -52,7 +53,9 @@ public class MutantService {
         }
 
         // Si no existe, verifica y guarda el resultado en la base de datos
-        boolean isMutant = checkIfMutant(dna);
+
+        MutantDetector detector = new MutantDetector();
+        boolean isMutant = detector.isMutant(dna);
         Dna record = new Dna(null, dnaSequence, isMutant);
         dnaRepository.save(record);
 

@@ -1,5 +1,6 @@
 package com.juan.parcialmutantesprogiii.service;
 
+import com.juan.parcialmutantesprogiii.detector.MutantDetector;
 import com.juan.parcialmutantesprogiii.services.MutantService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,8 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class MutantServiceTest {
 
-    @MockBean // Cambiar a MockBean para pruebas unitarias aisladas
-    private MutantService mutantService;
+    private MutantDetector mutantDetector = new MutantDetector();
 
 
     // Manejo de errores
@@ -18,40 +18,41 @@ public class MutantServiceTest {
     @Test
     void testEmptyArray() {
         String[] dna = {};
-        assertThrows(IllegalArgumentException.class, () -> mutantService.isMutant(dna));
+        assertThrows(IllegalArgumentException.class, () -> mutantDetector.isMutant(dna));
     }
 
     @Test
     void testNxMArray() {
         String[] dna = {"ATGC", "CAGT", "TTAT", "AGA"};
-        assertThrows(IllegalArgumentException.class, () -> mutantService.isMutant(dna));
+        assertThrows(IllegalArgumentException.class, () -> mutantDetector.isMutant(dna));
     }
 
     @Test
     void testArrayWithNumbers() {
         String[] dna = {"1234", "5678", "9101", "1121"};
-        assertThrows(IllegalArgumentException.class, () -> mutantService.isMutant(dna));
+        assertThrows(IllegalArgumentException.class, () -> mutantDetector.isMutant(dna));
     }
 
     @Test
     void testNullInput() {
-        assertThrows(IllegalArgumentException.class, () -> mutantService.isMutant(null));
+        assertThrows(IllegalArgumentException.class, () -> mutantDetector.isMutant(null));
     }
 
     @Test
     void testArrayOfNulls() {
         String[] dna = {null, null, null, null};
-        assertThrows(IllegalArgumentException.class, () -> mutantService.isMutant(dna));
+        assertThrows(IllegalArgumentException.class, () -> mutantDetector.isMutant(dna));
     }
 
     @Test
     void testInvalidCharacters() {
         String[] dna = {"BHAT", "CGBG", "TTAA", "GGTG"};
-        assertThrows(IllegalArgumentException.class, () -> mutantService.isMutant(dna));
+        assertThrows(IllegalArgumentException.class, () -> mutantDetector.isMutant(dna));
     }
 
     // Manejo de casos factibles (Mutante y No Mutante)
 
+    //Mutantes
     @Test
     void testMutantCase1() {
         String[] dna = {
@@ -60,19 +61,9 @@ public class MutantServiceTest {
                 "TCAG",
                 "GGTC"
         };
-        assertTrue(mutantService.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
     }
 
-    @Test
-    void testNonMutantCase1() {
-        String[] dna = {
-                "AAAT",
-                "AACC",
-                "AAAC",
-                "CGGG"
-        };
-        assertFalse(mutantService.isMutant(dna), "Expected DNA to be identified as human");
-    }
 
     @Test
     void testMutantCase2() {
@@ -82,45 +73,144 @@ public class MutantServiceTest {
                 "TGAC",
                 "GGTC"
         };
-        assertTrue(mutantService.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+    }
+
+
+    @Test
+    void testMutantCase5() {
+        String[] dna = {
+                "CTAGCTAG",
+                "CTAGCTAG",
+                "CTAGCTAG",
+                "CTAGCTAG"
+        };
+        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
     }
 
     @Test
-    void testNonMutantCase2() {
+    void testMutantCase6() {
+        String[] dna = {
+                "GGGG",
+                "ATCG",
+                "ATCG",
+                "GGGG"
+        };
+        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+    }
+
+    @Test
+    void testMutantCase7() {
         String[] dna = {
                 "AAAA",
                 "AAAA",
                 "AAAA",
                 "AAAA"
         };
-        assertFalse(mutantService.isMutant(dna), "Expected DNA to be identified as human");
+        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
     }
 
     @Test
+    void testMutantCase8() {
+        String[] dna = {
+                "ATAT",
+                "TATA",
+                "ATAT",
+                "TATA"
+        };
+        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+    }
+
+    //No Mutantes
+    @Test
+    void testNonMutantCase1() {
+        String[] dna = {
+                "TTAA",
+                "TTAA",
+                "CCGG",
+                "CCGG"
+        };
+        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+    }
+    @Test
+    void testNonMutantCase2() {
+        String[] dna = {
+                "AAGG",
+                "AAGG",
+                "TCTC",
+                "TCTC"
+        };
+        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+    }
+    @Test
     void testNonMutantCase3() {
+        String[] dna = {
+                "AAAT",
+                "AACC",
+                "AAAC",
+                "CGGG"
+        };
+        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+    }
+
+    @Test
+    void testNonMutantCase4() {
         String[] dna = {
                 "TGAC",
                 "ATCC",
                 "TAAG",
                 "GGTC"
         };
-        assertFalse(mutantService.isMutant(dna), "Expected DNA to be identified as human");
+        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
     }
 
     @Test
+    void testNonMutantCase5() {
+        String[] dna = {
+                "ATCG",
+                "TAGC",
+                "CGAT",
+                "GCAT"
+        };
+        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+    }
+
+    @Test
+    void testNonMutantCase6() {
+        String[] dna = {
+                "AAAC",
+                "AACC",
+                "CCGA",
+                "TGGC"
+        };
+        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+    }
+
+    @Test
+    void testNonMutantCase7() {
+        String[] dna = {
+                "CATG",
+                "TACG",
+                "AGTC",
+                "GATC"
+        };
+        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+    }
+    // Casos particulares
+    @Test
     void testLargeMutantCase() {
         String[] dna = {
-                "TCGCGTGAT",
+                "TCGGGTGAT",
                 "TGATCCTTT",
                 "TACGAGTGA",
-                "AAATGTCGG",
-                "ACGAGTGCT",
-                "AGACTAAGT",
-                "GAATTCGAA",
+                "AAATGTACG",
+                "ACGAGTCGT",
+                "AGACACATG",
+                "GAATTCCAA",
                 "ACTACGACC",
                 "TGAGTATCC"
         };
-        assertTrue(mutantService.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
     }
 
     @Test
@@ -136,6 +226,6 @@ public class MutantServiceTest {
                 "CAAAGGCTA",
                 "GCCCGGTTG"
         };
-        assertTrue(mutantService.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
     }
 }
