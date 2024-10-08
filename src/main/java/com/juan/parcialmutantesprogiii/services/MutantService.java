@@ -20,29 +20,6 @@ public class MutantService {
 
     // Método para verificar si una secuencia de ADN es mutante
     public boolean isMutant(String[] dna) {
-        // Validar el input
-        if (dna == null || dna.length == 0) {
-            throw new IllegalArgumentException("El ADN no puede ser null o vacío.");
-        }
-
-        int n = dna.length;
-
-        // Verificar si es un cuadrado NxN
-        for (String row : dna) {
-            if (row == null || row.length() != n) {
-                throw new IllegalArgumentException("El ADN debe ser un cuadrado NxN.");
-            }
-        }
-
-        // Verificar caracteres válidos
-        for (String row : dna) {
-            for (char base : row.toCharArray()) {
-                if ("ATCG".indexOf(base) == -1) {
-                    throw new IllegalArgumentException("El ADN contiene caracteres inválidos.");
-                }
-            }
-        }
-
 
         String dnaSequence = String.join(",", dna); // Convertir array a string único
         Optional<Dna> existingRecord = dnaRepository.findByDnaSequence(dnaSequence);
@@ -62,47 +39,7 @@ public class MutantService {
         return isMutant;
     }
 
-    // Lógica para verificar secuencias de 4 letras en las direcciones especificadas
-    private boolean checkIfMutant(String[] dna) {
-            int filas = dna.length;
-            int columnas = dna[0].length();
-            int contadorSecuencias = 0;
 
-            // Verificar horizontalmente
-            for (int i = 0; i < filas; i++) {
-                for (int j = 0; j <= columnas - 4; j++) {
-                    char caracterActual = dna[i].charAt(j);
-                    if (dna[i].charAt(j + 1) == caracterActual && dna[i].charAt(j + 2) == caracterActual && dna[i].charAt(j + 3) == caracterActual) {
-                        contadorSecuencias++;
-                    }
-                }
-            }
-
-            // Verificar verticalmente
-            for (int i = 0; i <= filas - 4; i++) {
-                for (int j = 0; j < columnas; j++) {
-                    char caracterActual = dna[i].charAt(j);
-                    if (dna[i + 1].charAt(j) == caracterActual && dna[i + 2].charAt(j) == caracterActual && dna[i + 3].charAt(j) == caracterActual) {
-                        contadorSecuencias++;
-                    }
-                }
-            }
-
-            // Verificar diagonalmente (de izquierda a derecha y de derecha a izquierda)
-            for (int i = 0; i <= filas - 4; i++) {
-                for (int j = 0; j <= columnas - 4; j++) {
-                    char caracterActual = dna[i].charAt(j);
-                    if (dna[i + 1].charAt(j + 1) == caracterActual && dna[i + 2].charAt(j + 2) == caracterActual && dna[i + 3].charAt(j + 3) == caracterActual) {
-                        contadorSecuencias++;
-                    }
-                    if (dna[i + 3].charAt(j) == caracterActual && dna[i + 2].charAt(j + 1) == caracterActual && dna[i + 1].charAt(j + 2) == caracterActual && dna[i].charAt(j + 3) == caracterActual) {
-                        contadorSecuencias++;
-                    }
-                }
-            }
-
-            return contadorSecuencias > 1;
-    }
     // Método para calcular las estadísticas de las secuencias de ADN
     public DnaStats getStats() {
         long mutants = dnaRepository.countByIsMutant(true);

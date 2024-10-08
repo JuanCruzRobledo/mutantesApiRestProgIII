@@ -17,8 +17,9 @@ public class MutantController {
     @Autowired
     private final MutantService mutantService;
 
-    @PostMapping()
+    @PostMapping(value = {"", "/"})
     public ResponseEntity<Void> isMutant(@Valid @RequestBody DnaRequest dnaRequest) {
+
         boolean isMutant = mutantService.isMutant(dnaRequest.getDna());
         return isMutant ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
