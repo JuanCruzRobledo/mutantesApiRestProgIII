@@ -1,14 +1,21 @@
 package com.juan.parcialmutantesprogiii.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.juan.parcialmutantesprogiii.domain.dtos.DnaRequest;
+import com.juan.parcialmutantesprogiii.domain.dtos.DnaStats;
+import com.juan.parcialmutantesprogiii.services.MutantService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
 
 @WebMvcTest(MutantController.class)
 public class MutantControllerTest {
@@ -16,42 +23,112 @@ public class MutantControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private MutantService mutantService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Test
-    public void testIsMutant_withValidDna_returnsOk() throws Exception {
-        String validDna = "{ \"dna\": [\"ATCG\", \"CAGT\", \"TTAG\", \"CTGA\"] }";
+    public void testIsNotMutantReturnsForbidden() throws Exception {
+        DnaRequest dnaRequest = new DnaRequest(new String[]{
+                "ATCG",
+                "CAGT",
+                "TTAT",
+                "AGAA"}
+        );
+        when(mutantService.isMutant(dnaRequest.getDna())).thenReturn(false);
+
         mockMvc.perform(post("/mutant")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(validDna))
+                        .content(objectMapper.writeValueAsString(dnaRequest)))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void testIsMutantReturnsOk() throws Exception {
+        DnaRequest dnaRequest = new DnaRequest(new String[]{
+                "ATCG",
+                "CAGT",
+                "TGAT",
+                "GGAA"}
+        );
+        when(mutantService.isMutant(dnaRequest.getDna())).thenReturn(true);
+
+        mockMvc.perform(post("/mutant")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dnaRequest)))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testIsMutant_withEmptyArray_returnsBadRequest() throws Exception {
-        String emptyDna = "{ \"dna\": [] }";
+    public void testBadRequestNxM() throws Exception {
+        DnaRequest dnaRequest = new DnaRequest(new String[]{
+                "ATCG",
+                "CAT",
+                "TGAT",
+                "GGAA"}
+        );
+        when(mutantService.isMutant(dnaRequest.getDna())).thenThrow(new IllegalArgumentException("El ADN debe ser un cuadrado NxN."));
+
         mockMvc.perform(post("/mutant")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(emptyDna))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("El arreglo de ADN no puede estar vacío o ser null."));
+                        .content(objectMapper.writeValueAsString(dnaRequest)))
+                .andExpect(status().isBadRequest());
+    }
+    @Test
+    public void testBadRequestNull() throws Exception {
+        DnaRequest dnaRequest = new DnaRequest(new String[]{
+                null,
+                null,
+                null,
+                null}
+        );
+        when(mutantService.isMutant(dnaRequest.getDna())).thenThrow(new IllegalArgumentException("El ADN no puede ser null o vacío."));
+
+        mockMvc.perform(post("/mutant")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dnaRequest)))
+                .andExpect(status().isBadRequest());
+    }
+    @Test
+    public void testBadRequestEmpty() throws Exception {
+        DnaRequest dnaRequest = new DnaRequest(new String[]{}
+        );
+        when(mutantService.isMutant(dnaRequest.getDna())).thenThrow(new IllegalArgumentException("El ADN no puede ser null o vacío."));
+
+        mockMvc.perform(post("/mutant")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dnaRequest)))
+                .andExpect(status().isBadRequest());
+    }
+    @Test
+    public void testInvalidCharacters() throws Exception {
+        DnaRequest dnaRequest = new DnaRequest(new String[]{
+                "DSAA",
+                "DSAD",
+                "JPFS",
+                "DSAD"
+        }
+        );
+        when(mutantService.isMutant(dnaRequest.getDna())).thenThrow(new IllegalArgumentException("El ADN contiene caracteres inválidos."));
+
+        mockMvc.perform(post("/mutant")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dnaRequest)))
+                .andExpect(status().isBadRequest());
     }
 
-    @Test
-    public void testIsMutant_withNonSquareMatrix_returnsBadRequest() throws Exception {
-        String nonSquareDna = "{ \"dna\": [\"ATCG\", \"CAGT\", \"TTAGG\"] }";
-        mockMvc.perform(post("/mutant")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(nonSquareDna))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("La matriz de ADN debe ser NxN."));
-    }
 
     @Test
-    public void testIsMutant_withInvalidCharacters_returnsBadRequest() throws Exception {
-        String invalidCharsDna = "{ \"dna\": [\"BTAG\", \"CAGH\", \"TTAH\", \"ACTG\"] }";
-        mockMvc.perform(post("/mutant")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidCharsDna))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("La matriz de ADN contiene caracteres no válidos. Solo se permiten A, C, T, G."));
+    public void testGetStatsReturnsOk() throws Exception {
+        DnaStats stats = new DnaStats(20,10, 4);
+        when(mutantService.getStats()).thenReturn(stats);
+
+        mockMvc.perform(get("/mutant/stats")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.countMutantDna").value(stats.getCountMutantDna()))
+                .andExpect(jsonPath("$.countHumanDna").value(stats.getCountHumanDna()));
     }
 }

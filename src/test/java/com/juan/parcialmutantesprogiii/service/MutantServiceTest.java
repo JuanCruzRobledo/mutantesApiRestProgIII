@@ -61,7 +61,7 @@ public class MutantServiceTest {
                 "TCAG",
                 "GGTC"
         };
-        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Se espera que el ADN sea mutante");
     }
 
 
@@ -73,7 +73,7 @@ public class MutantServiceTest {
                 "TGAC",
                 "GGTC"
         };
-        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Se espera que el ADN sea mutante");
     }
 
 
@@ -85,7 +85,7 @@ public class MutantServiceTest {
                 "CTAGCTAG",
                 "CTAGCTAG"
         };
-        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertThrows(IllegalArgumentException.class, () -> mutantDetector.isMutant(dna), "La matriz debe ser N x N");
     }
 
     @Test
@@ -96,7 +96,7 @@ public class MutantServiceTest {
                 "ATCG",
                 "GGGG"
         };
-        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Se espera que el ADN sea mutante");
     }
 
     @Test
@@ -107,7 +107,7 @@ public class MutantServiceTest {
                 "AAAA",
                 "AAAA"
         };
-        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+        assertTrue(mutantDetector.isMutant(dna), "Se espera que el ADN sea mutante");
     }
 
     @Test
@@ -118,7 +118,7 @@ public class MutantServiceTest {
                 "ATAT",
                 "TATA"
         };
-        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+        assertTrue(mutantDetector.isMutant(dna), "Se espera que el ADN sea mutante");
     }
 
     //No Mutantes
@@ -130,7 +130,7 @@ public class MutantServiceTest {
                 "CCGG",
                 "CCGG"
         };
-        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertFalse(mutantDetector.isMutant(dna), "Se espera que el ADN sea humano");
     }
     @Test
     void testNonMutantCase2() {
@@ -140,7 +140,7 @@ public class MutantServiceTest {
                 "TCTC",
                 "TCTC"
         };
-        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertFalse(mutantDetector.isMutant(dna), "Se espera que el ADN sea humano");
     }
     @Test
     void testNonMutantCase3() {
@@ -150,7 +150,7 @@ public class MutantServiceTest {
                 "AAAC",
                 "CGGG"
         };
-        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+        assertFalse(mutantDetector.isMutant(dna), "Se espera que el ADN sea humano");
     }
 
     @Test
@@ -161,7 +161,7 @@ public class MutantServiceTest {
                 "TAAG",
                 "GGTC"
         };
-        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+        assertFalse(mutantDetector.isMutant(dna), "Se espera que el ADN sea humano");
     }
 
     @Test
@@ -172,7 +172,7 @@ public class MutantServiceTest {
                 "CGAT",
                 "GCAT"
         };
-        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+        assertFalse(mutantDetector.isMutant(dna), "Se espera que el ADN sea humano");
     }
 
     @Test
@@ -183,7 +183,7 @@ public class MutantServiceTest {
                 "CCGA",
                 "TGGC"
         };
-        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+        assertFalse(mutantDetector.isMutant(dna), "Se espera que el ADN sea humano");
     }
 
     @Test
@@ -194,7 +194,7 @@ public class MutantServiceTest {
                 "AGTC",
                 "GATC"
         };
-        assertFalse(mutantDetector.isMutant(dna), "Expected DNA to be identified as human");
+        assertFalse(mutantDetector.isMutant(dna), "Se espera que el ADN sea humano");
     }
     // Casos particulares
     @Test
@@ -210,7 +210,7 @@ public class MutantServiceTest {
                 "ACTACGACC",
                 "TGAGTATCC"
         };
-        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Se espera que el ADN sea mutante");
     }
 
     @Test
@@ -226,6 +226,6 @@ public class MutantServiceTest {
                 "CAAAGGCTA",
                 "GCCCGGTTG"
         };
-        assertTrue(mutantDetector.isMutant(dna), "Expected DNA to be identified as mutant");
+        assertTrue(mutantDetector.isMutant(dna), "Se espera que el ADN sea mutante");
     }
 }

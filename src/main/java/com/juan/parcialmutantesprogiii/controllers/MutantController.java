@@ -17,11 +17,14 @@ public class MutantController {
     @Autowired
     private final MutantService mutantService;
 
-    @PostMapping(value = {"", "/"})
-    public ResponseEntity<Void> isMutant(@Valid @RequestBody DnaRequest dnaRequest) {
-
-        boolean isMutant = mutantService.isMutant(dnaRequest.getDna());
-        return isMutant ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    @PostMapping("")
+    public ResponseEntity<Object> isMutant(@Valid @RequestBody DnaRequest dnaRequest) {
+        try {
+            boolean isMutant = mutantService.isMutant(dnaRequest.getDna());
+            return isMutant ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e){
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Matriz no debe ser: Vacia,Nula,NxM y los caracteres solo pueden ser A,T,C o G");
+        }
     }
 
     @GetMapping("/stats")

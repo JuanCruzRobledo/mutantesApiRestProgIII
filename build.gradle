@@ -39,7 +39,7 @@ dependencies {
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // OpenAPI/Swagger para la documentación interactiva de la API
-    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
     //MAPSTRUCT
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 

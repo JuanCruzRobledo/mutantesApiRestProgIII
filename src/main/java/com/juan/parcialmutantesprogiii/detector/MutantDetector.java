@@ -6,7 +6,7 @@ public class MutantDetector {
 
     public boolean isMutant(String[] dna) {
 
-//        validateMatix(dna);
+        validateMatix(dna);
 
         int sequenceCount = 0; // Contador de secuencias mutantes
         int n = dna.length;
@@ -62,10 +62,10 @@ public class MutantDetector {
         return true;
     }
     public void validateMatix(String [] dna) throws IllegalArgumentException{
-        System.out.println("Validando matriz en MutantDetector");
+
         // Validar el input
         if (dna == null || dna.length == 0) {
-            throw new IllegalArgumentException("El ADN no puede ser null o vacío.MD");
+            throw new IllegalArgumentException("El ADN no puede ser null o vacío.");
         }
 
         int n = dna.length;
@@ -73,7 +73,7 @@ public class MutantDetector {
         // Verificar si es un cuadrado NxN
         for (String row : dna) {
             if (row == null || row.length() != n) {
-                throw new IllegalArgumentException("El ADN debe ser un cuadrado NxN.MD");
+                throw new IllegalArgumentException("El ADN debe ser un cuadrado NxN.");
             }
         }
 
@@ -81,7 +81,7 @@ public class MutantDetector {
         for (String row : dna) {
             for (char base : row.toCharArray()) {
                 if ("ATCG".indexOf(base) == -1) {
-                    throw new IllegalArgumentException("El ADN contiene caracteres inválidos.MD");
+                    throw new IllegalArgumentException("El ADN contiene caracteres inválidos.");
                 }
             }
         }
