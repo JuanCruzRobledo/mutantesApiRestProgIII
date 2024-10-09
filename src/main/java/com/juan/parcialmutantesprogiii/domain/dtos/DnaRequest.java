@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DnaRequest {
 
-    //@ValidDna
-    @NotNull
+    @ValidDna
+    @Valid
     private String[] dna;
 }
