@@ -14,7 +14,7 @@ La API está hosteada en Render:
 - [⚙️ Requisitos Previos](#️-requisitos-previos)
 - [🚀 Ejecución del Proyecto](#-ejecución-del-proyecto)
 - [📬 Uso de la API](#-uso-de-la-api)
-- [📈 Despliegue](#-despliegue)
+- [🧪 Pruebas](#-test)
 - [📑 Documentación Adicional](#-documentación-adicional)
 
 ## ⚙️ Requisitos Previos a la ejecución
@@ -34,6 +34,7 @@ La API está hosteada en Render:
       ```bash
       git clone https://github.com/JuanCruzRobledo/mutantesApiRestProgIII.git
       cd mutantesApiRestProgIII
+      ```
    
     - **Ejecutar la aplicación**: Ejecutar la clase principal Spring Boot llamada ParcialMutantesProgIiiApplication
    
@@ -60,7 +61,7 @@ Este endpoint detecta si una secuencia de ADN pertenece a un mutante según los 
    {
    "dna": ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]
    }
-
+   ```
 #### 📝 Validaciones Requeridas
 - **Clave `dna`**: Debe ser un arreglo de strings representando cada fila de la matriz de ADN.
 - #### **Restricciones de Matriz**:
@@ -72,9 +73,102 @@ Este endpoint detecta si una secuencia de ADN pertenece a un mutante según los 
 - **Mutante detectado**: Devuelve HTTP 200 OK.
 - **No es mutante**: Devuelve HTTP 403 Forbidden.
 
+## 🧪 Pruebas
+
+### Pruebas Untarias y de Integración
+La API cuenta con pruebas unitarias y de integración para asegurar su correcto funcionamiento, estas se pueden ejecutar para probar el funcionamiento de la Api de Manera independiente sin tener que ejecutar el servidor.
+
+### Pruebas de Servicio (`MutantServiceTest`) 
+ **Ubicacion**: `src\test\java\com\juan\parcialmutantesprogiii\controllers`.Esta clase se encarga de validar el manejo de errores en el detector de mutantes.
 
 
+### Pruebas de Controlador (`MutantControllerTest`) 
+ **Ubicacion**: `src\test\java\com\juan\parcialmutantesprogiii\controllers` .Esta clase realiza pruebas de integración en el controlador para asegurarse de que las respuestas HTTP sean las esperadas.
 
+### Pruebas POST Manuales
+- Mutantes
+```json
+   {
+      "dna": [
+         "AAAA",
+         "CCCC",
+         "TCAG",
+         "GGTC"
+      ]
+   }
+```
+   
+ ```json
+   {
+      "dna": [
+          "TGAC",
+          "AGCC",
+          "TGAC",
+          "GGTC"
+      ]
+   }
 
+```
+```json
+   {
+   "dna": [
+          "ATAT",
+          "TATA",
+          "ATAT",
+          "TATA"
+      ]
+   }
+```
+ ```json
+   {
+   "dna": [
+          "GGGG",
+          "ATCG",
+          "ATCG",
+          "GGGG"
+      ]
+   }
+```
+- No Mutantes
+```json
+   {
+      "dna": [
+         "AAAT",
+         "AACC",
+         "AAAC",
+         "CGGG"
+      ]
+   }
+```
+   
+ ```json
+   {
+      "dna": [
+          "TGAC",
+          "ATCC",
+          "TAAG",
+          "GGTC"
+      ]
+   }
 
-
+```
+```json
+   {
+   "dna": [
+          "ATCG",
+          "TAGC",
+          "CGAT",
+          "GCAT"
+      ]
+   }
+```
+```json
+   {
+   "dna": [
+          "AAAC",
+          "AACC",
+          "CCGA",
+          "TGGC"
+      ]
+   }
+```
