@@ -1,7 +1,5 @@
 # 🧬 API de Detección de Mutantes para Magneto
 
-![Java](https://img.shields.io/badge/Java-17-blue) ![Build](https://img.shields.io/badge/build-passing-brightgreen) ![Coverage](https://img.shields.io/badge/coverage-85%25-yellowgreen)
-
 ## 📋 Descripción
 Esta API permite detectar si una secuencia de ADN corresponde a un mutante, apoyando la misión de Magneto de reclutar nuevos integrantes. La API analiza secuencias de ADN y proporciona estadísticas sobre las verificaciones.
 
@@ -26,22 +24,24 @@ La API está hosteada en Render:
 - Cuenta en Render
 
 ## 🚀 Ejecución del Proyecto
-### Para ejecutar el proyecto localmente:
 
-1. **Clonar el repositorio**:
-   ```bash
-   git clone https://github.com/JuanCruzRobledo/mutantesApiRestProgIII.git
-   cd mutantesApiRestProgIII
+- ### Para acceder a la api Hosteada:
+   Acceder a la API en producción: La API está hosteada en Render, y puedes acceder a ella en para ver la documentación visual e interactiva de la API. [Swagger UI](https://mutantesapirestprogiii.onrender.com/swagger-ui/index.html)
+
+- ### Para ejecutar el proyecto localmente:
+
+    - **Clonar el repositorio**:
+      ```bash
+      git clone https://github.com/JuanCruzRobledo/mutantesApiRestProgIII.git
+      cd mutantesApiRestProgIII
    
-2. **Ejecutar la aplicación**: Ejecutar la clase principal Spring Boot llamada ParcialMutantesProgIiiApplication
+    - **Ejecutar la aplicación**: Ejecutar la clase principal Spring Boot llamada ParcialMutantesProgIiiApplication
    
-4. **Acceder a la API localmente**: Si ejecutas el proyecto en tu máquina local, 8080 es el puerto especificado en el archivo application.properties (puedes modificarlo si es necesario).
-   - Puedes hacer las solicitudes a la API en http://localhost:8080/swagger-ui/index.html.
-   - Puedes enviar una request atraves de Postman.
-   - Puedes acceder a la base de datos h2  http://localhost:8080/h2-console/ (revisar en el archivo application.properties: contraseña, usuario, URL de JDBC que es en memoria).
+    - **Acceder a la API localmente**: Si ejecutas el proyecto en tu máquina local, 8080 es el puerto especificado en el archivo application.properties (puedes modificarlo si es necesario).
+      - Puedes hacer las solicitudes a la API en http://localhost:8080/swagger-ui/index.html.
+      - Puedes enviar una request atraves de Postman.
+      - Puedes acceder a la base de datos h2  http://localhost:8080/h2-console/ (revisar en el archivo application.properties: contraseña, usuario, URL de JDBC que es en memoria).
   
-### Para acceder a la api Hosteada:
-Acceder a la API en producción: La API está hosteada en Render, y puedes acceder a ella en para ver la documentación visual e interactiva de la API. [Swagger UI](https://mutantesapirestprogiii.onrender.com/swagger-ui/index.html)
 
 ## 📬 Uso de la API
 
@@ -50,7 +50,7 @@ Acceder a la API en producción: La API está hosteada en Render, y puedes acced
 | `/mutant`      | POST   | Detecta si un ADN es mutante |
 | `/mutant/stats`        | GET    | Muestra estadísticas de ADN  |
 
-### 🔎 Endpoint `/mutant/`
+#### 🔎 Endpoint `/mutant/`
 Este endpoint detecta si una secuencia de ADN pertenece a un mutante según los criterios de Magneto. La solicitud debe enviarse como un POST en formato JSON con el siguiente esquema:
 
 
@@ -61,14 +61,14 @@ Este endpoint detecta si una secuencia de ADN pertenece a un mutante según los 
    "dna": ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]
    }
 
-### 📝 Validaciones Requeridas
+#### 📝 Validaciones Requeridas
 - **Clave `dna`**: Debe ser un arreglo de strings representando cada fila de la matriz de ADN.
 - #### **Restricciones de Matriz**:
   - **Tamaño mínimo**: 4x4.
   - **Formato NxN**: El número de filas y columnas debe ser igual.
   - **Bases Nitrogenadas Válidas**: Cada string debe contener solo las letras A, C, T, o G.
   - **Datos Completos**: No debe haber valores nulos ni vacíos.
-### 🔄 Respuestas del Endpoint
+#### 🔄 Respuestas del Endpoint
 - **Mutante detectado**: Devuelve HTTP 200 OK.
 - **No es mutante**: Devuelve HTTP 403 Forbidden.
 
