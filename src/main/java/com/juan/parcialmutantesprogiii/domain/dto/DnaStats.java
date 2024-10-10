@@ -1,5 +1,6 @@
-package com.juan.parcialmutantesprogiii.domain.dtos;
+package com.juan.parcialmutantesprogiii.domain.dto;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+@Repository // Indica que esta interfaz es un componente de acceso a datos y será manejado por Spring
 public interface DnaRepository extends JpaRepository<Dna, Long> {
     Optional<Dna> findByDnaSequence(String dnaSequence);
     long countByIsMutant(boolean isMutant);

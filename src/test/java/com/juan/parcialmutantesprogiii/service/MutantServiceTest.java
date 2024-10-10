@@ -1,13 +1,10 @@
 package com.juan.parcialmutantesprogiii.service;
 
-import com.juan.parcialmutantesprogiii.detector.MutantDetector;
-import com.juan.parcialmutantesprogiii.services.MutantService;
+import com.juan.parcialmutantesprogiii.business.detector.MutantDetector;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest
+
 public class MutantServiceTest {
 
     private MutantDetector mutantDetector = new MutantDetector();

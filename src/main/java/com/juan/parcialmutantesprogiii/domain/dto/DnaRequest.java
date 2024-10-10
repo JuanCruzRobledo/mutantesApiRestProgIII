@@ -1,8 +1,8 @@
-package com.juan.parcialmutantesprogiii.domain.dtos;
+package com.juan.parcialmutantesprogiii.domain.dto;
 
 import com.juan.parcialmutantesprogiii.validators.ValidDna;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DnaRequest {
-
-    @ValidDna
+    @Schema(description = "Secuencia de ADN", example = "[\"CATG\", \"TACG\", \"AGTC\", \"GATC\"]")
     @Valid
+    @ValidDna
     private String[] dna;
 }

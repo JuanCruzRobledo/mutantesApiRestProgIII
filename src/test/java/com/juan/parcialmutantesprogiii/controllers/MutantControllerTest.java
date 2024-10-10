@@ -1,9 +1,10 @@
 package com.juan.parcialmutantesprogiii.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.juan.parcialmutantesprogiii.domain.dtos.DnaRequest;
-import com.juan.parcialmutantesprogiii.domain.dtos.DnaStats;
-import com.juan.parcialmutantesprogiii.services.MutantService;
+import com.juan.parcialmutantesprogiii.domain.dto.DnaRequest;
+import com.juan.parcialmutantesprogiii.domain.dto.DnaStats;
+import com.juan.parcialmutantesprogiii.presentation.controllers.MutantController;
+import com.juan.parcialmutantesprogiii.business.services.MutantService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

@@ -1,6 +1,8 @@
-package com.juan.parcialmutantesprogiii.detector;
+package com.juan.parcialmutantesprogiii.business.detector;
 
+import org.springframework.stereotype.Component;
 
+@Component // Define MutantDetector como un componente de Spring para su inyección
 public class MutantDetector {
     private static final int MUTANT_SEQUENCE_LENGTH = 4;
 
