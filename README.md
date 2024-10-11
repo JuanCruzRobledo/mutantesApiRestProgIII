@@ -1,5 +1,4 @@
 # 🧬 API de Detección de Mutantes para Magneto
-https://github.com/user-attachments/assets/118f91a6-7b93-49b5-87b3-8ae65f855c94
 ## 📋 Descripción
 Esta API permite detectar si una secuencia de ADN corresponde a un mutante, apoyando la misión de Magneto de reclutar nuevos integrantes. La API analiza secuencias de ADN y proporciona estadísticas sobre las verificaciones.
 
@@ -25,9 +24,6 @@ La API está hosteada en Render:
 
 ## 🚀 Ejecución del Proyecto
 
-- ### Para acceder a la api Hosteada:
-   Acceder a la API en producción: La API está hosteada en Render, y puedes acceder a ella en para ver la documentación visual e interactiva de la API. [Swagger UI](https://mutantesapirestprogiii.onrender.com/swagger-ui/index.html)
-
 - ### Para ejecutar el proyecto localmente:
 
     - **Clonar el repositorio**:
@@ -41,8 +37,21 @@ La API está hosteada en Render:
     - **Acceder a la API localmente**: Si ejecutas el proyecto en tu máquina local, 8080 es el puerto especificado en el archivo application.properties (puedes modificarlo si es necesario).
       - Puedes hacer las solicitudes a la API en http://localhost:8080/swagger-ui/index.html.
       - Puedes enviar una request atraves de Postman.
+         - **POST**: http://localhost:8080/mutant
+         - **GET**:  http://localhost:8080/mutant/stats
       - Puedes acceder a la base de datos h2  http://localhost:8080/h2-console/ (revisar en el archivo application.properties: contraseña, usuario, URL de JDBC que es en memoria).
-  
+
+        https://github.com/user-attachments/assets/a91ddc4d-a431-4e6e-a369-d9ca777b418d
+        
+- ### Para acceder a la api Hosteada:
+   Acceder a la API en producción: La API está hosteada en Render, y puedes acceder a ella en para ver la documentación visual e interactiva de la API. [Swagger UI](https://mutantesapirestprogiii.onrender.com/swagger-ui/index.html)
+   - Tambien puedes enviar una request atraves de Postman.
+      - **POST**: https://mutantesapirestprogiii.onrender.com/mutant
+      - **GET**:  https://mutantesapirestprogiii.onrender.com/mutant/stats
+   - Puedes enviar una request atraves de la documentación interactiva [Swagger UI](https://mutantesapirestprogiii.onrender.com/swagger-ui/index.html). 
+
+     https://github.com/user-attachments/assets/118f91a6-7b93-49b5-87b3-8ae65f855c94   
+     
 
 ## 📬 Uso de la API
 
@@ -76,7 +85,7 @@ Este endpoint detecta si una secuencia de ADN pertenece a un mutante según los 
 ## 🧪 Pruebas
 
 ### Pruebas Untarias y de Integración
-La API cuenta con pruebas unitarias y de integración para asegurar su correcto funcionamiento, estas se pueden ejecutar para probar el funcionamiento de la Api de Manera independiente sin tener que ejecutar el servidor.
+La API cuenta con pruebas unitarias y de integración para asegurar su correcto funcionamiento, estas `se pueden ejecutar` para probar el funcionamiento de la Api de Manera independiente sin tener que ejecutar el servidor.
 
 ### Pruebas de Servicio (`MutantServiceTest`) 
  **Ubicacion**: `src\test\java\com\juan\parcialmutantesprogiii\controllers`.Esta clase se encarga de validar el manejo de errores en el detector de mutantes.
@@ -84,6 +93,9 @@ La API cuenta con pruebas unitarias y de integración para asegurar su correcto 
 
 ### Pruebas de Controlador (`MutantControllerTest`) 
  **Ubicacion**: `src\test\java\com\juan\parcialmutantesprogiii\controllers` .Esta clase realiza pruebas de integración en el controlador para asegurarse de que las respuestas HTTP sean las esperadas.
+
+ ![image](https://github.com/user-attachments/assets/cdc26870-be30-45d4-a3bb-7fc704186a7b)
+
 
 ### Pruebas POST Manuales
 - Mutantes
