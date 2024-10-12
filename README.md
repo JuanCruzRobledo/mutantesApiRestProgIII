@@ -41,7 +41,7 @@ La API está hosteada en Render:
          - **GET**:  http://localhost:8080/mutant/stats
       - Puedes acceder a la base de datos h2  http://localhost:8080/h2-console/ (revisar en el archivo application.properties: contraseña, usuario, URL de JDBC que es en memoria).
 
-        https://github.com/user-attachments/assets/a91ddc4d-a431-4e6e-a369-d9ca777b418d
+        https://github.com/user-attachments/assets/f423c07c-98f3-4b07-a6dc-d77484523db8
         
 - ### Para acceder a la api Hosteada:
    Acceder a la API en producción: La API está hosteada en Render, y puedes acceder a ella en para ver la documentación visual e interactiva de la API. [Swagger UI](https://mutantesapirestprogiii.onrender.com/swagger-ui/index.html)
@@ -50,7 +50,7 @@ La API está hosteada en Render:
       - **GET**:  https://mutantesapirestprogiii.onrender.com/mutant/stats
    - Puedes enviar una request atraves de la documentación interactiva [Swagger UI](https://mutantesapirestprogiii.onrender.com/swagger-ui/index.html). 
 
-     https://github.com/user-attachments/assets/118f91a6-7b93-49b5-87b3-8ae65f855c94   
+     https://github.com/user-attachments/assets/8887c1fc-cfd3-4625-aaa7-225d024de9fc
      
 
 ## 📬 Uso de la API
