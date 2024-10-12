@@ -54,7 +54,7 @@ public class MutantController {
         try {
             boolean isMutant = mutantService.isMutant(dnaRequest.getDna()); //Llama al servicio para devolver el resultado de si es mutante
             // Retorna un estado HTTP 200 OK si es mutante, o 403 FORBIDDEN si no lo es.
-            return isMutant ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            return isMutant ? ResponseEntity.ok().body("El ADN es MUTANTE") : ResponseEntity.status(HttpStatus.FORBIDDEN).body("El ADN es HUMANO");
         } catch (Exception e){
             // Retorna un estado HTTP 500 INTERNAL_SERVER_ERROR si ocurre algún error en la verificación.
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error. Intente mas tarde");
