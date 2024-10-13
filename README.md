@@ -1,4 +1,13 @@
 # 🧬 API de Detección de Mutantes para Magneto
+
+## 📂 Tabla de Contenidos
+- [📋 Descripción](#-descripción)
+- [🌐 URL de Producción](#-url-de-producción)
+- [⚙️ Requisitos Previos](#️-requisitos-previos)
+- [🚀 Ejecución del Proyecto](#-ejecución-del-proyecto)
+- [📬 Uso de la API](#-uso-de-la-api)
+- [🧪 Pruebas](#-pruebas)
+
 ## 📋 Descripción
 Esta API permite detectar si una secuencia de ADN corresponde a un mutante, apoyando la misión de Magneto de reclutar nuevos integrantes. La API analiza secuencias de ADN y proporciona estadísticas sobre las verificaciones.
 ## Diagrama y explicación de secuencia 
@@ -11,15 +20,6 @@ Esta API permite detectar si una secuencia de ADN corresponde a un mutante, apoy
 La API está hosteada en Render:
 - URL Base: `https://mutantesapirestprogiii.onrender.com`
 - Documentación interactiva en ➡️ [Swagger UI](https://mutantesapirestprogiii.onrender.com/swagger-ui/index.html).
-
-## 📂 Tabla de Contenidos
-- [📋 Descripción](#-descripción)
-- [🌐 URL de Producción](#-url-de-producción)
-- [⚙️ Requisitos Previos](#️-requisitos-previos)
-- [🚀 Ejecución del Proyecto](#-ejecución-del-proyecto)
-- [📬 Uso de la API](#-uso-de-la-api)
-- [🧪 Pruebas](#-pruebas)
-
 
 ## ⚙️ Requisitos Previos
 - Java 17
