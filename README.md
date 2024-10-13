@@ -1,6 +1,11 @@
 # 🧬 API de Detección de Mutantes para Magneto
 ## 📋 Descripción
 Esta API permite detectar si una secuencia de ADN corresponde a un mutante, apoyando la misión de Magneto de reclutar nuevos integrantes. La API analiza secuencias de ADN y proporciona estadísticas sobre las verificaciones.
+## Diagrama y explicación de secuencia 
+
+![Diagrama de secuencia - Parcial Programacion III ](https://github.com/user-attachments/assets/36631540-5952-40b8-9533-9acbbcb12ecb)
+
+[Parcial Programacion - Diagrama de secuencia y explicacion..pdf](https://github.com/user-attachments/files/17357334/Parcial.Programacion.-.Diagrama.de.secuencia.y.explicacion.pdf)
 
 ## 🌐 URL de Producción
 La API está hosteada en Render:
@@ -85,7 +90,7 @@ Este endpoint detecta si una secuencia de ADN pertenece a un mutante según los 
 ## 🧪 Pruebas
 
 ### Pruebas Untarias y de Integración
-La API cuenta con pruebas unitarias y de integración para asegurar su correcto funcionamiento, estas `se pueden ejecutar` para probar el funcionamiento de la Api de Manera independiente sin tener que ejecutar el servidor.
+La API cuenta con pruebas unitarias y de integración para asegurar su correcto funcionamiento, estas `se pueden ejecutar` para probar el funcionamiento de la API de Manera independiente sin tener que ejecutar el servidor.
 
 ### Pruebas de Servicio (`MutantServiceTest`) 
  **Ubicacion**: `src\test\java\com\juan\parcialmutantesprogiii\controllers`.Esta clase se encarga de validar el manejo de errores en el detector de mutantes.
